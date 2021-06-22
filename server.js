@@ -3,6 +3,7 @@ const express = require("express");
 const app = express();
 
 const tweetsRoute = require("./routes/tweetsRoute");
+const userRoute = require("./routes/userRoute");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -16,6 +17,8 @@ app.use(cors());
 // });
 
 app.use("/api/tweets", tweetsRoute);
+
+app.use("/api/user", userRoute);
 
 app.get("/", (req, res) => {
   res.send("hehe");

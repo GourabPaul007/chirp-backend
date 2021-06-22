@@ -1,27 +1,32 @@
 [
   {
-    "id": 1,
+    "id": "1",
     "name": "john doe",
+    "username": "jdoe1",
     "body": "hahahaha",
     "date": "September 14, 2016",
     "likes": ["name1", "name2", "name3", "name4"],
+    "saves": ["save1", "save2", "save3", "save4"],
     "comments": [
       {
-        "id": 11,
+        "id": "11",
+        "tweetId": "1",
         "name": "user 1",
         "date": "September 14, 2016",
         "body": "comment 1",
         "likes": 5
       },
       {
-        "id": 12,
+        "id": "12",
+        "tweetId": "1",
         "name": "user 2",
         "date": "September 14, 2017",
         "body": "comment 2",
         "likes": 25
       },
       {
-        "id": 13,
+        "id": "13",
+        "tweetId": "1",
         "name": "user 3",
         "date": "September 14, 2018",
         "body": "comment 3",
@@ -30,8 +35,8 @@
     ],
     "replies": [
       {
-        "id": 1222,
-        "commentId": 11,
+        "id": "1222",
+        "commentId": "11",
         "name": "Ruser 1",
         "date": "September 14, 2017",
         "body": "Reply 1",
@@ -40,20 +45,22 @@
     ]
   },
   {
-    "id": 2,
+    "id": "2",
     "name": "john doe 1",
+    "username": "jdoe2",
     "body": "hahahaha 1",
     "date": "September 14, 2016",
-    "likes": 30,
+    "likes": ["name1", "name2", "name3", "name4"],
+    "saves": ["save1", "save2", "save3", "save4"],
     "comments": [
       {
-        "id": 11,
+        "id": "14",
         "name": "user 0",
         "date": "September 14, 2016",
         "body": "comment 0"
       },
       {
-        "id": 12,
+        "id": "15",
         "name": "user 1",
         "date": "September 14, 2016",
         "body": "comment 0"
@@ -61,41 +68,22 @@
     ]
   },
   {
-    "id": 3,
+    "id": "3",
     "name": "john doe 2",
+    "username": "jdoe3",
     "body": "hahahaha 2",
     "date": "September 14, 2016",
-    "likes": 12,
+    "likes": ["name1", "name2", "name3", "name4"],
+    "saves": ["save1", "save2", "save3", "save4"],
     "comments": [
       {
-        "id": 11,
+        "id": "16",
         "name": "user 0",
         "date": "September 14, 2016",
         "body": "comment 0"
       },
       {
-        "id": 12,
-        "name": "user 1",
-        "date": "September 14, 2016",
-        "body": "comment 1"
-      }
-    ]
-  },
-  {
-    "id": 4,
-    "name": "john doe 3",
-    "body": "lorem ipsum dolor amet",
-    "date": "September 14, 2016",
-    "likes": 0,
-    "comments": [
-      {
-        "id": 11,
-        "name": "user 0",
-        "date": "September 14, 2016",
-        "body": "comment 0"
-      },
-      {
-        "id": 12,
+        "id": "17",
         "name": "user 1",
         "date": "September 14, 2016",
         "body": "comment 1"
