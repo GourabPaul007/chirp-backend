@@ -4,14 +4,15 @@
     "name": "john doe",
     "username": "jdoe1",
     "body": "hahahaha",
-    "date": "September 14, 2016",
+    "date": "1624599507065",
     "likes": ["name1", "name2", "name3", "name4"],
-    "saves": ["save1", "save2", "save3", "save4"],
+    "saves": ["save1", "save2", "save3", "save4", "paul"],
     "comments": [
       {
         "id": "11",
         "tweetId": "1",
         "name": "user 1",
+        "username": "user1",
         "date": "September 14, 2016",
         "body": "comment 1",
         "likes": 5
@@ -20,6 +21,7 @@
         "id": "12",
         "tweetId": "1",
         "name": "user 2",
+        "username": "user2",
         "date": "September 14, 2017",
         "body": "comment 2",
         "likes": 25
@@ -28,6 +30,7 @@
         "id": "13",
         "tweetId": "1",
         "name": "user 3",
+        "username": "user3",
         "date": "September 14, 2018",
         "body": "comment 3",
         "likes": 12
@@ -49,19 +52,23 @@
     "name": "john doe 1",
     "username": "jdoe2",
     "body": "hahahaha 1",
-    "date": "September 14, 2016",
+    "date": "1624599507065",
     "likes": ["name1", "name2", "name3", "name4"],
-    "saves": ["save1", "save2", "save3", "save4"],
+    "saves": ["save1", "save2", "save3", "save4", "paul"],
     "comments": [
       {
         "id": "14",
-        "name": "user 0",
+        "tweetId": "2",
+        "name": "user 1",
+        "username": "user1",
         "date": "September 14, 2016",
         "body": "comment 0"
       },
       {
         "id": "15",
-        "name": "user 1",
+        "tweetId": "2",
+        "name": "user 2",
+        "username": "user2",
         "date": "September 14, 2016",
         "body": "comment 0"
       }
@@ -72,21 +79,17 @@
     "name": "john doe 2",
     "username": "jdoe3",
     "body": "hahahaha 2",
-    "date": "September 14, 2016",
+    "date": "1624599507065",
     "likes": ["name1", "name2", "name3", "name4"],
     "saves": ["save1", "save2", "save3", "save4"],
     "comments": [
       {
         "id": "16",
-        "name": "user 0",
+        "tweetId": "3",
+        "name": "user 1",
+        "username": "user1",
         "date": "September 14, 2016",
         "body": "comment 0"
-      },
-      {
-        "id": "17",
-        "name": "user 1",
-        "date": "September 14, 2016",
-        "body": "comment 1"
       }
     ]
   }

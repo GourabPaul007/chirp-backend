@@ -15,6 +15,9 @@ router.post("/new", (req, res) => {
       id: uuidv4(), //req.body.id, //uuidv4(),
       name: req.body.name,
       body: req.body.body,
+      likes: req.body.likes,
+      saves: req.body.saves,
+      comments: req.body.comments,
       date: Date.now(),
     };
     demoData.push(newTweet);
