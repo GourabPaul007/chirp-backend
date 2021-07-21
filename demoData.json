@@ -15,7 +15,7 @@
         "username": "user1",
         "date": "September 14, 2016",
         "body": "comment 1",
-        "likes": 5
+        "likes": ["cn1", "cn2", "cn3"]
       },
       {
         "id": "12",
@@ -24,7 +24,7 @@
         "username": "user2",
         "date": "September 14, 2017",
         "body": "comment 2",
-        "likes": 25
+        "likes": ["cn1", "cn2", "cn3"]
       },
       {
         "id": "13",
@@ -33,7 +33,7 @@
         "username": "user3",
         "date": "September 14, 2018",
         "body": "comment 3",
-        "likes": 12
+        "likes": ["cn1", "cn2", "cn3"]
       }
     ],
     "replies": [
@@ -62,7 +62,8 @@
         "name": "user 1",
         "username": "user1",
         "date": "September 14, 2016",
-        "body": "comment 0"
+        "body": "comment 0",
+        "likes": ["cn1", "cn2", "cn3"]
       },
       {
         "id": "15",
@@ -70,7 +71,8 @@
         "name": "user 2",
         "username": "user2",
         "date": "September 14, 2016",
-        "body": "comment 0"
+        "body": "comment 0",
+        "likes": ["cn1", "cn2", "cn3"]
       }
     ]
   },
@@ -89,7 +91,8 @@
         "name": "user 1",
         "username": "user1",
         "date": "September 14, 2016",
-        "body": "comment 0"
+        "body": "comment 0",
+        "likes": ["cn1", "cn2", "cn3"]
       }
     ]
   }
