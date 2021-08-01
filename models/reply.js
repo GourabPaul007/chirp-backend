@@ -1,10 +1,18 @@
 const mongoose = require("mongoose");
 
-const tweetSchema = new mongoose.Schema({
+const replySchema = new mongoose.Schema({
   // id: {
   //   type: String,
   //   required: true,
   // },
+  tweetId: {
+    type: String,
+    required: true,
+  },
+  commentId: {
+    type: String,
+    required: true,
+  },
   name: {
     type: String,
     required: true,
@@ -13,18 +21,17 @@ const tweetSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  body: {
-    type: String,
-    required: true,
-  },
   date: {
     type: String,
     required: true,
   },
+  body: {
+    type: String,
+    required: true,
+  },
   likes: [{ type: String }],
-  saves: [{ type: String }],
 });
 
-const Tweet = mongoose.model("Tweet", tweetSchema);
+const Reply = mongoose.model("Reply", replySchema);
 
-module.exports = Tweet;
+module.exports = Reply;

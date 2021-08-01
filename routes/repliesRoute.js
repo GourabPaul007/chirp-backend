@@ -5,55 +5,56 @@ const { v4: uuidv4 } = require("uuid");
 const demoData = require("../demoData.json");
 const Comment = require("../models/comment");
 const Tweet = require("../models/tweet");
+const Reply = require("../models/reply");
 
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 
-// Create Comments on a tweet
-router.post("/:tweetId/newComment", async (req, res) => {
+// Create Reply on a Comment
+router.post("/:tweetId/:commentId/newReply", async (req, res) => {
   try {
-    const newComment = new Comment({
+    const newReply = new Reply({
       id: uuidv4(),
       tweetId: req.params.tweetId,
+      commentId: req.params.commentId,
       name: req.body.name,
       username: req.body.username,
       body: req.body.body,
       date: Date.now(),
       likes: [],
     });
-    await newComment.save();
+    await newReply.save();
     return res.status(200).json({ status: "success" });
   } catch (e) {
     console.log("Something went wrong", e);
   }
+  console.log("Did not hit");
 });
 
-// update likes on a comment
-router.post("/:commentId/updateCommentLikes", async (req, res) => {
+// Update Likes on a reply
+router.post("/:tweetId/:replyId/updateReplyLikes", async (req, res) => {
   const liker = req.body.name;
   try {
-    const singleComment = await Comment.findById(req.params.commentId);
-    if (singleComment.likes.includes(liker)) {
-      singleComment.likes.splice(singleComment.likes.indexOf(liker), 1);
-      await singleComment.save();
-      return res.status(200).json({ status: "Comment UnLiked" });
+    const singleReply = await Reply.findById(req.params.replyId);
+    if (singleReply.likes.includes(liker)) {
+      singleReply.likes.splice(singleReply.likes.indexOf(liker), 1);
+      await singleReply.save();
+      return res.status(200).json({ status: "Reply UnLiked" });
     } else {
-      singleComment.likes.push(liker);
-      await singleComment.save();
-      return res.status(200).json({ status: "Comment Liked" });
+      singleReply.likes.push(liker);
+      await singleReply.save();
+      return res.status(200).json({ status: "Reply Liked" });
     }
   } catch (e) {
-    console.log(e);
+    console.log("bruh?", e);
   }
-  res.json({ status: "did not hit endpoint" });
 });
 
 // Check likes, its required for checking if user liked or not on application start
-router.get("/:commentId/likes", async (req, res) => {
+router.get("/:tweetId/:replyId/likes", async (req, res) => {
   try {
-    const singleComment = await Comment.findById(req.params.commentId);
-    console.log(singleComment);
-    const likesData = singleComment.likes;
+    const singleReply = await Reply.findById(req.params.replyId);
+    const likesData = singleReply.likes;
     return res.json(likesData);
   } catch (e) {
     console.log("Error", e);
@@ -64,11 +65,12 @@ router.get("/:commentId/likes", async (req, res) => {
 // ===================================================================================================
 // ===================================================================================================
 //                                              Delete
-router.post("/:commentId/deleteComment", async (req, res) => {
+
+router.post("/:replyId/deleteReply", async (req, res) => {
   try {
-    const deletedComment = await Comment.findByIdAndDelete(req.params.commentId);
-    console.log(deletedComment);
-    res.json("Comment deleted");
+    const deletedReply = await Reply.findByIdAndDelete(req.params.replyId);
+    console.log(deletedReply);
+    res.json("Reply deleted");
   } catch (e) {
     console.log(e);
   }
