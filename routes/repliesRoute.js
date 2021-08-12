@@ -69,7 +69,6 @@ router.get("/:tweetId/:replyId/likes", async (req, res) => {
 router.post("/:replyId/deleteReply", async (req, res) => {
   try {
     const deletedReply = await Reply.findByIdAndDelete(req.params.replyId);
-    console.log(deletedReply);
     res.json("Reply deleted");
   } catch (e) {
     console.log(e);

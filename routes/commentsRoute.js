@@ -52,7 +52,6 @@ router.post("/:commentId/updateCommentLikes", async (req, res) => {
 router.get("/:commentId/likes", async (req, res) => {
   try {
     const singleComment = await Comment.findById(req.params.commentId);
-    console.log(singleComment);
     const likesData = singleComment.likes;
     return res.json(likesData);
   } catch (e) {
@@ -67,7 +66,6 @@ router.get("/:commentId/likes", async (req, res) => {
 router.post("/:commentId/deleteComment", async (req, res) => {
   try {
     const deletedComment = await Comment.findByIdAndDelete(req.params.commentId);
-    console.log(deletedComment);
     res.json("Comment deleted");
   } catch (e) {
     console.log(e);

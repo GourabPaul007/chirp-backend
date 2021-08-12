@@ -15,7 +15,6 @@ router.use(express.urlencoded({ extended: true }));
 router.post("/new", async (req, res) => {
   if (req.body.name && req.body.body) {
     const newTweet = new Tweet({
-      id: uuidv4(), //req.body.id, //uuidv4(),
       name: req.body.name,
       username: req.body.username,
       body: req.body.body,
@@ -48,7 +47,6 @@ router.get("/:id", async (req, res) => {
   try {
     const singleTweet = await Tweet.findById(req.params.id);
     const comments = await Comment.find({ tweetId: req.params.id });
-    console.log(comments);
     const replies = await Reply.find({ tweetId: req.params.id });
     // singleTweet.comments = allComments; //adding comments to singletweet
     const wholeTweet = JSON.parse(JSON.stringify(singleTweet));
@@ -131,7 +129,6 @@ router.get("/:id/saves", async (req, res) => {
 router.post("/:tweetId/deleteTweet", async (req, res) => {
   try {
     const deletedTweet = await Tweet.findByIdAndDelete(req.params.tweetId);
-    console.log(deletedTweet);
     res.json("tweet deleted");
   } catch (e) {
     console.log(e);

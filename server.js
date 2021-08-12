@@ -16,13 +16,6 @@ mongoose
 
 const app = express();
 
-const tweetsRoute = require("./routes/tweetsRoute");
-const bannerRoute = require("./routes/bannerRoute");
-const commentsRoute = require("./routes/commentsRoute");
-const repliesRoute = require("./routes/repliesRoute");
-
-// const userRoute = require("./routes/userRoute");
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -30,14 +23,17 @@ const cors = require("cors");
 
 app.use(cors());
 
-// app.use("/", (req, res) => {
-//   console.log("new request");
-// });
+const tweetsRoute = require("./routes/tweetsRoute");
+const bannerRoute = require("./routes/bannerRoute");
+const commentsRoute = require("./routes/commentsRoute");
+const repliesRoute = require("./routes/repliesRoute");
+const userRoute = require("./routes/userRoute");
 
 app.use("/api/tweets", tweetsRoute);
 app.use("/api/banner", bannerRoute);
 app.use("/api/comments", commentsRoute);
 app.use("/api/replies", repliesRoute);
+app.use("/api/user", userRoute);
 
 // app.use("/api/user", userRoute);
 
