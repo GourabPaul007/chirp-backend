@@ -17,10 +17,11 @@ router.post("/new", async (req, res) => {
     const newTweet = new Tweet({
       name: req.body.name,
       username: req.body.username,
+      authorID: req.body.uid,
       body: req.body.body,
       likes: [], //req.body.likes
       saves: [], //req.body.saves
-      comments: req.body.comments,
+      comments: [],
       date: Date.now(),
     });
     await newTweet.save();
@@ -65,16 +66,16 @@ router.get("/:id", async (req, res) => {
 // Update Tweet Likes
 router.post("/:id/updateLikes", async (req, res) => {
   const singleTweet = await Tweet.findById(req.params.id);
-  const liker = req.body.name;
-  if (singleTweet.likes.includes(liker)) {
-    singleTweet.likes.splice(singleTweet.likes.indexOf(liker), 1);
+  const likerID = req.body.uid;
+  if (singleTweet.likes.includes(likerID)) {
+    singleTweet.likes.splice(singleTweet.likes.indexOf(likerID), 1);
     await singleTweet.save();
-    console.log(`${liker} removed`);
+    console.log(`${likerID} like removed`);
     return res.status(200).json({ status: "like Deleted" });
   } else {
-    singleTweet.likes.push(liker);
+    singleTweet.likes.push(likerID);
     await singleTweet.save();
-    console.log(`${liker} added`);
+    console.log(`${likerID} like added`);
     return res.status(200).json({ status: "like Added" });
   }
   return res.status(400).json();
@@ -97,16 +98,16 @@ router.get("/:id/likes", async (req, res) => {
 
 router.post("/:id/updateSaves", async (req, res) => {
   const singleTweet = await Tweet.findById(req.params.id);
-  const saver = req.body.name;
-  if (singleTweet.saves.includes(saver)) {
-    singleTweet.saves.splice(singleTweet.saves.indexOf(saver), 1);
+  const saverID = req.body.uid;
+  if (singleTweet.saves.includes(saverID)) {
+    singleTweet.saves.splice(singleTweet.saves.indexOf(saverID), 1);
     await singleTweet.save();
-    console.log(`${saver} removed`);
+    console.log(`${saverID} save removed`);
     return res.status(200).json({ status: "tweet Deleted" });
   } else {
-    singleTweet.saves.push(saver);
+    singleTweet.saves.push(saverID);
     await singleTweet.save();
-    console.log(`${saver} added`);
+    console.log(`${saverID} save added`);
     return res.status(200).json({ status: "tweet Added" });
   }
   return res.status(400).json();
@@ -128,12 +129,16 @@ router.get("/:id/saves", async (req, res) => {
 //                                           Delete Tweet
 router.post("/:tweetId/deleteTweet", async (req, res) => {
   try {
-    const deletedTweet = await Tweet.findByIdAndDelete(req.params.tweetId);
-    res.json("tweet deleted");
+    await Tweet.findByIdAndDelete(req.params.tweetId);
+    await Comment.deleteMany({ tweetId: req.params.tweetId });
+    await Reply.deleteMany({ tweetId: req.params.tweetId });
+    console.log("Tweet Deleted");
+    return res.json("tweet deleted");
   } catch (e) {
     console.log(e);
   }
   console.log("ignored");
+  res.json("something went wrong");
 });
 
 module.exports = router;

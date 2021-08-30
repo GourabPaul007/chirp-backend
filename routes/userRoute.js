@@ -25,11 +25,22 @@ router.post("/newUser", async (req, res) => {
   res.status(200).json("new user created");
 });
 
-// Get a single user
+// Get a single user by uid
 router.get("/:uid/getUser", async (req, res) => {
   try {
     const { uid } = req.params;
     const user = await User.findOne({ uid: uid });
+    const u = JSON.parse(JSON.stringify(user));
+    return res.json(u);
+  } catch (e) {
+    console.log(e);
+  }
+});
+// Get a single user by username
+router.get("/:username/getUserByUsername", async (req, res) => {
+  try {
+    const { username } = req.params;
+    const user = await User.findOne({ username: username });
     const u = JSON.parse(JSON.stringify(user));
     return res.json(u);
   } catch (e) {

@@ -17,28 +17,30 @@ router.post("/:tweetId/newComment", async (req, res) => {
       tweetId: req.params.tweetId,
       name: req.body.name,
       username: req.body.username,
+      authorID: req.body.uid,
       body: req.body.body,
       date: Date.now(),
       likes: [],
     });
     await newComment.save();
-    return res.status(200).json({ status: "success" });
+    return res.status(200).json(newComment);
   } catch (e) {
     console.log("Something went wrong", e);
   }
+  res.json("Something went wrong");
 });
 
 // update likes on a comment
 router.post("/:commentId/updateCommentLikes", async (req, res) => {
-  const liker = req.body.name;
+  const likerID = req.body.uid;
   try {
     const singleComment = await Comment.findById(req.params.commentId);
-    if (singleComment.likes.includes(liker)) {
-      singleComment.likes.splice(singleComment.likes.indexOf(liker), 1);
+    if (singleComment.likes.includes(likerID)) {
+      singleComment.likes.splice(singleComment.likes.indexOf(likerID), 1);
       await singleComment.save();
       return res.status(200).json({ status: "Comment UnLiked" });
     } else {
-      singleComment.likes.push(liker);
+      singleComment.likes.push(likerID);
       await singleComment.save();
       return res.status(200).json({ status: "Comment Liked" });
     }
@@ -66,6 +68,7 @@ router.get("/:commentId/likes", async (req, res) => {
 router.post("/:commentId/deleteComment", async (req, res) => {
   try {
     const deletedComment = await Comment.findByIdAndDelete(req.params.commentId);
+    console.log("Comment Deleted", deletedComment);
     res.json("Comment deleted");
   } catch (e) {
     console.log(e);

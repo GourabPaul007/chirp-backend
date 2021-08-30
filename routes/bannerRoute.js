@@ -10,22 +10,25 @@ router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 
 // Get all bookmarked Tweets
-router.get("/:user/bookmarks", async (req, res) => {
+router.get("/:uid/bookmarks", async (req, res) => {
   try {
-    const bookmarkedTweets = await Tweet.find({ saves: "paul" });
+    const bookmarkedTweets = await Tweet.find({ saves: `${req.params.uid}` });
     res.json(bookmarkedTweets);
   } catch (e) {
     console.log("Cant find tweets", e);
+    res.status(200).json("Cant find tweets");
   }
 });
 
 // Get all liked Tweets
-router.get("/:user/likes", async (req, res) => {
+router.get("/:uid/likes", async (req, res) => {
   try {
-    const likedTweets = await Tweet.find({ likes: "paul" });
+    const likedTweets = await Tweet.find({ likes: [`${req.params.uid}`] });
+    console.log("likedTweets", likedTweets);
     res.json(likedTweets);
   } catch (e) {
     console.log("Cant find tweets", e);
+    res.status(200).json("Cant find tweets");
   }
 });
 

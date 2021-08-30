@@ -18,36 +18,40 @@ router.post("/:tweetId/:commentId/newReply", async (req, res) => {
       tweetId: req.params.tweetId,
       commentId: req.params.commentId,
       name: req.body.name,
+      authorID: req.body.uid,
       username: req.body.username,
       body: req.body.body,
       date: Date.now(),
       likes: [],
     });
+    console.log(newReply);
     await newReply.save();
-    return res.status(200).json({ status: "success" });
+    return res.status(200).json(newReply);
   } catch (e) {
     console.log("Something went wrong", e);
   }
   console.log("Did not hit");
+  res.json("reply creation failed");
 });
 
 // Update Likes on a reply
 router.post("/:tweetId/:replyId/updateReplyLikes", async (req, res) => {
-  const liker = req.body.name;
+  const likerID = req.body.uid;
   try {
     const singleReply = await Reply.findById(req.params.replyId);
-    if (singleReply.likes.includes(liker)) {
-      singleReply.likes.splice(singleReply.likes.indexOf(liker), 1);
+    if (singleReply.likes.includes(likerID)) {
+      singleReply.likes.splice(singleReply.likes.indexOf(likerID), 1);
       await singleReply.save();
-      return res.status(200).json({ status: "Reply UnLiked" });
+      return res.status(200).json("Reply_UnLiked");
     } else {
-      singleReply.likes.push(liker);
+      singleReply.likes.push(likerID);
       await singleReply.save();
-      return res.status(200).json({ status: "Reply Liked" });
+      return res.status(200).json("Reply_Liked");
     }
   } catch (e) {
     console.log("bruh?", e);
   }
+  res.json("updating reply likes failed");
 });
 
 // Check likes, its required for checking if user liked or not on application start
